@@ -21,6 +21,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <junit.version>4.12</junit.version>
         <lombok.version>1.16.18</lombok.version>
+        <redis.version>2.1.4.RELEASE</redis.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -31,6 +32,12 @@
                 <version>2.1.4.RELEASE</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-redis -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-redis</artifactId>
+                <version>${redis.version}</version>
             </dependency>
 
             <!--springboot启动器-->

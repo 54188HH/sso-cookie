@@ -11,6 +11,8 @@
     <modules>
         <module>sso-login</module>
         <module>sso-vip</module>
+        <module>sso-main</module>
+        <module>sso-car</module>
     </modules>
 
     <properties>

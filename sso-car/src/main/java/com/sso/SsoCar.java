@@ -7,8 +7,8 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
 @SpringBootApplication
 @EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
-public class SsoLogin {
-  public static void main(String[] args) {
-      SpringApplication.run(SsoLogin.class,args);
-  }
+public class SsoCar {
+    public static void main(String[] args) {
+        SpringApplication.run(SsoCar.class,args);
+    }
 }

@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>登录页面</title>
 </head>
 <body>
+    <p style="color: red" th:text="${session.msg}"></p>
     <form action="/login" method="POST">
         用户名:<input name="username" type="text">
         密  码:<input name="password" type="password">

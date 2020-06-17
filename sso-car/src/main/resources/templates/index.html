@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-    <span>欢迎来到购物车页面</span>
-    <a href="http://login.codeshop.com:9000/view/login?target=car.codeshop.com:9020">登录</a>
+    <span th:if="${session.loginUser} == null">欢迎来到购物车页面</span>
+    <a th:if="${session.loginUser} == null" href="http://login.ssologin.com:9000/view/login?target=http://car.ssologin.com:9020/view/car">登录</a>
+<p th:unless="${session.loginUser} == null">
+    <span style="color: brown" th:text="${session.loginUser.username}"></span>来到购物车
+</p>
 </body>
 </html>

@@ -1,11 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>主页</title>
 </head>
 <body>
     <span>欢迎来到主页面！</span>
-    <a href="http://login.codeshop.com:9000/view/login?target=www.codeshop.com:9010">登录</a>
+    <a th:if="${session.loginUser == null}" href="http://login.ssologin.com:9000/view/login?target=http://main.ssologin.com:9010/view/index">登录</a>
+    <a th:unless="${session.loginUser == null}" href="http://login.ssologin.com:9000/view/loginout">退出</a>
+<p th:unless="${session.loginUser == null}">
+    <span th:text="${session.loginUser.username}" style="color: aquamarine">已登录</span>
+</p>
 </body>
 </html>

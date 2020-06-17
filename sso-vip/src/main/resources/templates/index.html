@@ -1,11 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-    <span>欢迎来到VIP界面</span>
-    <a href="http://login.codeshop.com:9000/view/login?target=vip.codeshop.com:9030">登录</a>
+    <span th:if="${session.loginUser} == null">欢迎来到VIP界面</span>
+    <a th:if="${session.loginUser} == null" href="http://login.ssologin.com:9000/view/login?target=http://vip.ssologin.com:9030/view/vip">登录</a>
+    <a th:unless="${session.loginUser} == null" href="#">退出</a>
+
+<p th:unless="${session.loginUser == null}">
+    <span th:text="${session.loginUser.username}" style="color: darkolivegreen"></span>来到VIP专用页面
+</p>
 </body>
 </html>

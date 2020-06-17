@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>sso-main</artifactId>
+    <artifactId>sso-public-module</artifactId>
 
     <dependencies>
         <dependency>
@@ -18,18 +18,7 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-        <!--拿到sso-public-module里面的公共资源-->
-        <dependency>
-            <groupId>com.sso</groupId>
-            <artifactId>sso-public-module</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
     </dependencies>
-
 </project>

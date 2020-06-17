@@ -1,6 +1,6 @@
-127.0.0.1   www.codeshop.com
-127.0.0.1   vip.codeshop.com
-127.0.0.1   car.codeshop.com
-127.0.0.1   login.codeshop.com
+127.0.0.1   main.ssologin.com
+127.0.0.1   vip.ssologin.com
+127.0.0.1   car.ssologin.com
+127.0.0.1   login.ssologin.com
 
 C:\Windows\System32\drivers\etc

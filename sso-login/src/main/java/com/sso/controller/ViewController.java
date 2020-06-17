@@ -10,34 +10,53 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/view")
 public class ViewController {
-    @Resource
-    private RedisTemplate redisTemplate;
+  @Resource private RedisTemplate redisTemplate;
 
-    @RequestMapping("/login")
-    public String toLogin(@RequestParam(required = false,defaultValue = "")String target,
-                          HttpSession session,@CookieValue(required = false,value = "TOKEN") Cookie cookie){
-        if (StringUtils.isEmpty(target)){
-            target = "http://main.ssologin.com:9010";
-        }
+  @RequestMapping("/loginout")
+  public String loginOut(
+      HttpServletRequest request,
+      HttpServletResponse response,
+      HttpSession session,
+      @CookieValue(required = false, value = "TOKEN") Cookie cook) {
 
-        if (cookie != null){
-            String val = cookie.getValue();
-            User user = (User) redisTemplate.opsForValue().get(val);
-            return "redirect:"+target;
-        }
-        // TODO:校验target地址是否合法
-        //重定向地址
-        session.setAttribute("target",target);
-        return "login";
+    String value = cook.getValue();
+
+    redisTemplate.delete(value);
+
+      Cookie cookie = new Cookie("TOKEN",null);
+      cookie.setMaxAge(0);
+      cookie.setPath("/");
+      response.addCookie(cookie);
+
+    session.removeAttribute("");
+
+    return "login";
+  }
+
+  @RequestMapping("/login")
+  public String toLogin(
+      @RequestParam(required = false, defaultValue = "") String target,
+      HttpSession session,
+      @CookieValue(required = false, value = "TOKEN") Cookie cookie) {
+    if (StringUtils.isEmpty(target)) {
+      target = "http://main.ssologin.com:9010";
     }
-    @RequestMapping("/loginout")
-    public String loginOut(@CookieValue(value = "TOKEN")Cookie cookie){
-        cookie.setMaxAge(0);
-        return "login";
+
+    if (cookie != null) {
+      String val = cookie.getValue();
+      User user = (User) redisTemplate.opsForValue().get(val);
+      return "redirect:" + target;
     }
+    // TODO:校验target地址是否合法
+    // 重定向地址
+    session.setAttribute("target", target);
+    return "login";
+  }
 }

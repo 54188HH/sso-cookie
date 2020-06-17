@@ -24,6 +24,7 @@ public class ViewController {
       System.out.println("cookie::"+cookie);
             String value = cookie.getValue();
             if (!StringUtils.isEmpty(value)){
+        System.out.println("valur="+value);
                 Map map = restTemplate.getForObject(Constants.LOGIN_INFO_URL + value, Map.class);
                 session.setAttribute("loginUser",map);
             }

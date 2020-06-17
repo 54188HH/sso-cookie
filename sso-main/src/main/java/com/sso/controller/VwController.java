@@ -25,7 +25,6 @@ public class VwController {
             String value = cookie.getValue();
             if (!StringUtils.isEmpty(value)){
                 Map map = restTemplate.getForObject(Constants.LOGIN_INFO_URL + value, Map.class);
-                System.out.println("map"+map.toString());
                 session.setAttribute("loginUser",map);
             }
         }

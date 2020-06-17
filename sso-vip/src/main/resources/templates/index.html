@@ -5,6 +5,7 @@
     <title>Title</title>
 </head>
 <body>
+
     <span th:if="${session.loginUser} == null">欢迎来到VIP界面</span>
     <a th:if="${session.loginUser} == null" href="http://login.ssologin.com:9000/view/login?target=http://vip.ssologin.com:9030/view/vip">登录</a>
     <a th:unless="${session.loginUser} == null" href="#">退出</a>

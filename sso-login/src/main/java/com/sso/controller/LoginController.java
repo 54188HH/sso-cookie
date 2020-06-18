@@ -1,6 +1,7 @@
 package com.sso.controller;
 
 import com.sso.pojo.User;
+import com.sso.utils.CookieUtil;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -9,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.HashSet;
@@ -37,13 +37,14 @@ public class LoginController {
          if (first.isPresent()){
              //说明数据库内有该用户，所以保存用户的信息
              String token = UUID.randomUUID().toString();
-             Cookie cookie = new Cookie("TOKEN",token);
+             CookieUtil.addCookie(response,"TOKEN",token,3600);
+             /*Cookie cookie = new Cookie("TOKEN",token);
              //cookie要想在子系统中互相访问的话，要在同一个域也就是域相同
-             cookie.setDomain("ssologin.com");
+             cookie.setDomain("");
              //给cookie添加过期时间
              cookie.setMaxAge(3600);
              //通过response将token写到cookie里面
-             response.addCookie(cookie);
+             response.addCookie(cookie);*/
              redisTemplate.opsForValue().set(token,first.get());
          }else{
              //登录失败

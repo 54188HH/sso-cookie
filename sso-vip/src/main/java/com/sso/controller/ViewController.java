@@ -21,10 +21,8 @@ public class ViewController {
     public String toVipIndex(@CookieValue(required = false,value = "TOKEN")Cookie cookie,
                              HttpSession session){
         if (cookie != null){
-      System.out.println("cookie::"+cookie);
             String value = cookie.getValue();
             if (!StringUtils.isEmpty(value)){
-        System.out.println("valur="+value);
                 Map map = restTemplate.getForObject(Constants.LOGIN_INFO_URL + value, Map.class);
                 session.setAttribute("loginUser",map);
             }

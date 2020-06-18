@@ -1,6 +1,7 @@
 package com.sso.controller;
 
 import com.sso.pojo.User;
+import com.sso.utils.CookieUtil;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -24,19 +25,22 @@ public class ViewController {
       HttpServletRequest request,
       HttpServletResponse response,
       HttpSession session,
-      @CookieValue(required = false, value = "TOKEN") Cookie cook) {
-
-    String value = cook.getValue();
-
-    redisTemplate.delete(value);
-
-      Cookie cookie = new Cookie("TOKEN",null);
-      cookie.setMaxAge(0);
-      cookie.setPath("/");
-      response.addCookie(cookie);
-
-    session.removeAttribute("");
-
+      @CookieValue(value = "TOKEN") Cookie cookie) {
+    /*String token = null;
+    if (cookie != null) {
+      token = cookie.getValue();
+    }
+    if (!StringUtils.isEmpty(token)) {
+      // 表示token数据不为空
+      //redisTemplate.delete(token);
+      // 删除cookie
+      Cookie cook = new Cookie("TOKEN", null);
+      cook.setPath("/");
+      cook.setDomain("ssologin.com");
+      cook.setMaxAge(0);
+      response.addCookie(cook);
+    }*/
+    CookieUtil.removeCookie(response,"TOKEN");
     return "login";
   }
 

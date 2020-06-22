@@ -10,6 +10,7 @@
         <module name="sso-car" />
         <module name="sso-login" />
         <module name="sso-main" />
+        <module name="sso-public-module" />
         <module name="sso-vip" />
       </profile>
     </annotationProcessing>

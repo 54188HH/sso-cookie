@@ -37,14 +37,9 @@ public class LoginController {
          if (first.isPresent()){
              //说明数据库内有该用户，所以保存用户的信息
              String token = UUID.randomUUID().toString();
+             //通过Cookie工具类把Cookie写入到浏览器中
              CookieUtil.addCookie(response,"TOKEN",token,3600);
-             /*Cookie cookie = new Cookie("TOKEN",token);
-             //cookie要想在子系统中互相访问的话，要在同一个域也就是域相同
-             cookie.setDomain("");
-             //给cookie添加过期时间
-             cookie.setMaxAge(3600);
-             //通过response将token写到cookie里面
-             response.addCookie(cookie);*/
+             //将生成的token作为key值将登陆成功的用户存入到redis中
              redisTemplate.opsForValue().set(token,first.get());
          }else{
              //登录失败
@@ -60,6 +55,7 @@ public class LoginController {
     @GetMapping("/info")
     @ResponseBody
     public User getUserInfo(String token){
+        //如果token不为空，就以token为key值去redis里面取value值（用户对象）
         if (!StringUtils.isEmpty(token)){
             return (User) redisTemplate.opsForValue().get(token);
         }else {

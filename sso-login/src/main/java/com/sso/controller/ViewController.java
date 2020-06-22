@@ -2,6 +2,7 @@ package com.sso.controller;
 
 import com.sso.pojo.User;
 import com.sso.utils.CookieUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -18,7 +19,8 @@ import javax.servlet.http.HttpSession;
 @Controller
 @RequestMapping("/view")
 public class ViewController {
-  @Resource private RedisTemplate redisTemplate;
+  @Autowired
+  private RedisTemplate redisTemplate;
 
   @RequestMapping("/loginout")
   public String loginOut(
@@ -26,20 +28,7 @@ public class ViewController {
       HttpServletResponse response,
       HttpSession session,
       @CookieValue(value = "TOKEN") Cookie cookie) {
-    /*String token = null;
-    if (cookie != null) {
-      token = cookie.getValue();
-    }
-    if (!StringUtils.isEmpty(token)) {
-      // 表示token数据不为空
-      //redisTemplate.delete(token);
-      // 删除cookie
-      Cookie cook = new Cookie("TOKEN", null);
-      cook.setPath("/");
-      cook.setDomain("ssologin.com");
-      cook.setMaxAge(0);
-      response.addCookie(cook);
-    }*/
+    //调用Cookie工具类删除浏览器中的Cookie
     CookieUtil.removeCookie(response,"TOKEN");
     return "login";
   }
